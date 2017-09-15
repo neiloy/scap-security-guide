@@ -3,13 +3,26 @@
 	<description>Auditing rules</description>
 
 
+		<Rule id="installed_app_is_eap6" severity="medium">
+			<title>JBOSS Server is EAP 6</title>
+			<description>The installed server is running EAP 6.</description>
+			<rationale>Logs preservation and size limits can be implicitly incurred via periodic log rolling</rationale>
+			<ident cce=""/>
+			<oval id="installed_app_is_eap6"/>
+			<ocil clause="eap 6 has not been properly installed">
+			Verify that EAP 6 was properly installed...
+			</ocil>
+		</Rule>
+
+
+
 	<Rule id="jboss_roll_over_transfer_logs" severity="medium">
 		<title>JBoss servers must be configured to roll over and transfer logs on a minimum weekly basis.</title>
 		<description>Information stored in one location is vulnerable to accidental or incidental deletion or
-			alteration. Protecting log data is important during a forensic investigation to ensure 
-			investigators can track and understand what may have occurred. Off-loading should be set up 
-			as a scheduled task but can be configured to be run manually, if other processes during 
-			the off-loading are manual. Off-loading is a common process in information systems with 
+			alteration. Protecting log data is important during a forensic investigation to ensure
+			investigators can track and understand what may have occurred. Off-loading should be set up
+			as a scheduled task but can be configured to be run manually, if other processes during
+			the off-loading are manual. Off-loading is a common process in information systems with
 			limited log storage capacity.</description>
 		<rationale>Logs preservation and size limits can be implicitly incurred via periodic log rolling</rationale>
 		<ident cce=""/>
@@ -18,11 +31,11 @@
 
 	<Rule id="jboss_http_mgmt_session_encryption" severity="medium">
 		<title>HTTP management session traffic must be encrypted</title>
-		<description>Types of management interfaces utilized by the JBoss EAP 
-			application server include web-based HTTP interfaces as well as 
-			command line-based management interfaces. In the event remote HTTP 
-			management is required, the access must be via HTTPS. This 
-			requirement is in conjunction with the requirement to isolate all 
+		<description>Types of management interfaces utilized by the JBoss EAP
+			application server include web-based HTTP interfaces as well as
+			command line-based management interfaces. In the event remote HTTP
+			management is required, the access must be via HTTPS. This
+			requirement is in conjunction with the requirement to isolate all
 			management access to a restricted network.</description>
 		<rationale>Administrative activity should be secured and is not so by default</rationale>
 		<ident cce=""/>
@@ -31,35 +44,35 @@
 
 	<Rule id="jboss_web_interface_https_enabled" severity="medium">
 		<title>HTTPS must be enabled for JBoss web interfaces</title>
-		<descritpion>Encryption is critical for protection of remote access 
-			sessions. If encryption is not being used for integrity, malicious 
-			users may gain the ability to modify the application server 
-			configuration. The use of cryptography for ensuring integrity of 
-			remote access sessions mitigates that risk. Application servers 
-			utilize a web management interface and scripted commands when 
-			allowing remote access. Web access requires the use of TLS, and 
-			scripted access requires using ssh or some other form of approved 
-			cryptography. Application servers must have a capability to enable a 
-			secure remote admin capability. FIPS 140-2 approved TLS versions 
-			include TLS V1.0 or greater. FIPS 140-2 approved TLS versions must 
-			be enabled, and non-FIPS-approved SSL versions must be disabled. 
-			NIST SP 800-52 specifies the preferred configurations for government 
+		<description>Encryption is critical for protection of remote access
+			sessions. If encryption is not being used for integrity, malicious
+			users may gain the ability to modify the application server
+			configuration. The use of cryptography for ensuring integrity of
+			remote access sessions mitigates that risk. Application servers
+			utilize a web management interface and scripted commands when
+			allowing remote access. Web access requires the use of TLS, and
+			scripted access requires using ssh or some other form of approved
+			cryptography. Application servers must have a capability to enable a
+			secure remote admin capability. FIPS 140-2 approved TLS versions
+			include TLS V1.0 or greater. FIPS 140-2 approved TLS versions must
+			be enabled, and non-FIPS-approved SSL versions must be disabled.
+			NIST SP 800-52 specifies the preferred configurations for government
 			systems</description>
 		<rationale>Remote web activity should be secured</rationale>
 		<ident cce=""/>
 		<ref ossrg="SRG-APP-000015-AS-000010" stigid="000015" />
 	</Rule>
 
-	<Rule id="jboss_java_applications_permissions" severity="high"/>
+	<Rule id="jboss_java_applications_permissions" severity="high">
 		<title>Java permissions must be set for hosted applications</title>
-		<description>The Java Security Manager is a java class that manages the 
-			external boundary of the Java Virtual Machine (JVM) sandbox, 
-			controlling how code executing within the JVM can interact with 
-			resources outside the JVM. The JVM requires a security policy in 
-			order to restrict application access. A properly configured security 
-			policy will define what rights the application has to the underlying 
-			system. For example, rights to make changes to files on the host 
-			system or to initiate network sockets in order to connect to another 
+		<description>The Java Security Manager is a java class that manages the
+			external boundary of the Java Virtual Machine (JVM) sandbox,
+			controlling how code executing within the JVM can interact with
+			resources outside the JVM. The JVM requires a security policy in
+			order to restrict application access. A properly configured security
+			policy will define what rights the application has to the underlying
+			system. For example, rights to make changes to files on the host
+			system or to initiate network sockets in order to connect to another
 			system</description>
 		<rationale>Restricting application access will prevent unauthorized use of JVM</rationale>
 		<ident cce=""/>
@@ -68,15 +81,15 @@
 
 	<Rule id="jboss_mgmt_realm_user_roles" severity="medium">
 		<title>Users in JBoss Management Security Realms must be in the appropriate role</title>
-		<description>Security realms are a series of mappings between users and 
-			passwords and users and roles. There are 2 JBoss security realms 
-			provided by default; they are "management realm" and "application 
-			realm". Management realm stores authentication information for the 
-			management API, which provides functionality for the web-based 
-			management console and the management command line interface (CLI). 
-			mgmt-groups.properties stores user to group mapping for the 
-			ManagementRealm but only when role-based access controls (RBAC) is 
-			enabled. If management users are not in the appropriate role, 
+		<description>Security realms are a series of mappings between users and
+			passwords and users and roles. There are 2 JBoss security realms
+			provided by default; they are "management realm" and "application
+			realm". Management realm stores authentication information for the
+			management API, which provides functionality for the web-based
+			management console and the management command line interface (CLI).
+			mgmt-groups.properties stores user to group mapping for the
+			ManagementRealm but only when role-based access controls (RBAC) is
+			enabled. If management users are not in the appropriate role,
 			unauthorized access to JBoss resources can occur</description>
 		<rationale>Appropriate assignment of roles allows users to be authorized for more finely differenced actions</rationale>
 		<ident cce=""/>
@@ -85,11 +98,11 @@
 
 	<Rule id="jboss_default_app_realm_silent_authentication" severity="high">
 		<title>Silent Authentication must be removed from the Default Application Security Realm</title>
-		<description>Silent Authentication is a configuration setting that allows 
-			local OS users access to the JBoss server and a wide range of 
-			operations without specifically authenticating on an individual user 
-			basis. By default $localuser is a Superuser. This introduces an 
-			integrity and availability vulnerability and violates best practice 
+		<description>Silent Authentication is a configuration setting that allows
+			local OS users access to the JBoss server and a wide range of
+			operations without specifically authenticating on an individual user
+			basis. By default $localuser is a Superuser. This introduces an
+			integrity and availability vulnerability and violates best practice
 			requirements regarding accountability</description>
 		<rationale>Allowing silent authentication creates a relaxed means of accessing the system</rationale>
 		<ident cce=""/>
@@ -98,11 +111,11 @@
 
 	<Rule id="jboss_default_mgmt_realm_silent_authentication" severity="high">
 		<title>Silent Authentication must be removed from the Default Management Security Realm</title>
-		<description>Silent Authentication is a configuration setting that allows 
-			local OS users access to the JBoss server and a wide range of 
-			operations without specifically authenticating on an individual user 
-			basis. By default $localuser is a Superuser. This introduces an 
-			integrity and availability vulnerability and violates best practice 
+		<description>Silent Authentication is a configuration setting that allows
+			local OS users access to the JBoss server and a wide range of
+			operations without specifically authenticating on an individual user
+			basis. By default $localuser is a Superuser. This introduces an
+			integrity and availability vulnerability and violates best practice
 			requirements regarding accountability</description>
 		<rationale>Allowing silent authentication creates a relaxed means of accessing the system</rationale>
 		<ident cce=""/>
@@ -111,11 +124,11 @@
 
 	<Rule id="jboss_java_security_mgr" severity="high">
 		<title>The Java Security Manager must be enabled for the JBoss application server.</title>
-		<description>The Java Security Manager is a java class that manages the external 
-                        boundary of the Java Virtual Machine (JVM) sandbox, controlling how code 
-                        executing within the JVM can interact with resources outside the JVM. The 
-                        Java Security Manager uses a security policy to determine whether a given 
-                        action will be permitted or denied. To protect the host system, the JBoss 
+		<description>The Java Security Manager is a java class that manages the external
+                        boundary of the Java Virtual Machine (JVM) sandbox, controlling how code
+                        executing within the JVM can interact with resources outside the JVM. The
+                        Java Security Manager uses a security policy to determine whether a given
+                        action will be permitted or denied. To protect the host system, the JBoss
                         application server must be run within the Java Security Manager</description>
 		<rationale>Creating a secure boundary prevents unnecessary and potentially disruptive access</rationale>
 		<ident cce=""/>
@@ -124,10 +137,10 @@
 
 	<Rule id="jboss_rbac_configuration" severity="high">
 		<title>The JBoss server must be configured with Role Based Access Controls.</title>
-		<description>By default, the JBoss server is not configured to utilize role based 
-                        access controls (RBAC). RBAC provides the capability to restrict user access 
-                        to their designated management role, thereby limiting access to only the 
-                        JBoss functionality that they are supposed to have. Without RBAC, the JBoss 
+		<description>By default, the JBoss server is not configured to utilize role based
+                        access controls (RBAC). RBAC provides the capability to restrict user access
+                        to their designated management role, thereby limiting access to only the
+                        JBoss functionality that they are supposed to have. Without RBAC, the JBoss
                         server is not able to enforce authorized access according to role</description>
 		<rationale>Having role-based access limits functionality to only the intended users</rationale>
 		<ident cce=""/>
@@ -136,10 +149,10 @@
 
 	<Rule id="jboss_mgmt_interface" severity="high">
 		<title>JBoss management interfaces must be secured.</title>
-		<description>JBoss utilizes the concept of security realms to secure the management 
-                        interfaces used for JBoss server administration. If the security realm 
-                        attribute is omitted or removed from the management interface definition, 
-                        access to that interface is no longer secure. The JBoss management interfaces 
+		<description>JBoss utilizes the concept of security realms to secure the management
+                        interfaces used for JBoss server administration. If the security realm
+                        attribute is omitted or removed from the management interface definition,
+                        access to that interface is no longer secure. The JBoss management interfaces
                         must be secured</description>
 		<rationale>Management functionality of the JBoss server must remain secured separate from general application functionality</rationale>
 		<ident cce=""/>
@@ -148,12 +161,12 @@
 
 	<Rule id="jboss_logs_mgmt_access_authentication" severity="medium">
 		<title>The JBoss server must generate log records for access and authentication events to the management interface.</title>
-		<description>Log records can be generated from various components within the JBoss 
-                        application server. The minimum list of logged events should be those 
-                        pertaining to access and authentication events to the management interface 
-                        as well as system startup and shutdown events. By default, JBoss does not log 
-                        management interface access but does provide a default file handler. This 
-                        handler needs to be enabled. Configuring this setting meets several STIG 
+		<description>Log records can be generated from various components within the JBoss
+                        application server. The minimum list of logged events should be those
+                        pertaining to access and authentication events to the management interface
+                        as well as system startup and shutdown events. By default, JBoss does not log
+                        management interface access but does provide a default file handler. This
+                        handler needs to be enabled. Configuring this setting meets several STIG
                         auditing requirements</description>
 		<rationale>Management access and authentication should be recorded and auditable</rationale>
 		<ident cce=""/>
@@ -162,10 +175,10 @@
 
 	<Rule id="jboss_log_event_selection" severity="medium">
 		<title>JBoss must be configured to allow only the ISSM (or individuals or roles appointed by the ISSM) to select which loggable events are to be logged.</title>
-		<description>The JBoss server must be configured to select which personnel are 
-                        assigned the role of selecting which loggable events are to be logged. In 
-                        JBoss, the role designated for selecting auditable events is the "Auditor" 
-                        role. The personnel or roles that can select loggable events are only the 
+		<description>The JBoss server must be configured to select which personnel are
+                        assigned the role of selecting which loggable events are to be logged. In
+                        JBoss, the role designated for selecting auditable events is the "Auditor"
+                        role. The personnel or roles that can select loggable events are only the
                         ISSM (or individuals or roles appointed by the ISSM)</description>
 		<rationale>Ability to control loggable events should be restricted per ISSM standards</rationale>
 		<ident cce=""/>
@@ -174,8 +187,8 @@
 
 	<Rule id="jboss_logging_initialization" severity="medium">
 		<title>JBoss must be configured to initiate session logging upon startup.</title>
-		<description>Session logging activities are developed, integrated, and used in 
-                        consultation with legal counsel in accordance with applicable federal 
+		<description>Session logging activities are developed, integrated, and used in
+                        consultation with legal counsel in accordance with applicable federal
                         laws, Executive Orders, directives, policies, or regulations</description>
 		<rationale>Session logging must begin at the soonest opportunity to comply with regulation</rationale>
 		<ident cce=""/>
@@ -184,17 +197,17 @@
 
 	<Rule id="jboss_logging_connection" severity="medium">
 		<title>JBoss must be configured to log the IP address of the remote system connecting to the JBoss system/cluster.</title>
-		<description>Information system logging capability is critical for accurate forensic 
-                        analysis. Without being able to establish what type of event occurred, it 
-                        would be difficult to establish, correlate, and investigate the events 
-                        relating to an incident or identify those responsible. Log record content 
-                        that may be necessary to satisfy the requirement of this control includes 
-                        time stamps, source and destination addresses, user/process identifiers, 
-                        event descriptions, success/fail indications, filenames involved, and 
-                        access control or flow control rules invoked. Application servers must log 
-                        all relevant log data that pertains to the application server. Examples of 
-                        relevant data include, but are not limited to, Java Virtual Machine (JVM) 
-                        activity, HTTPD/Web server activity, and application server-related system 
+		<description>Information system logging capability is critical for accurate forensic
+                        analysis. Without being able to establish what type of event occurred, it
+                        would be difficult to establish, correlate, and investigate the events
+                        relating to an incident or identify those responsible. Log record content
+                        that may be necessary to satisfy the requirement of this control includes
+                        time stamps, source and destination addresses, user/process identifiers,
+                        event descriptions, success/fail indications, filenames involved, and
+                        access control or flow control rules invoked. Application servers must log
+                        all relevant log data that pertains to the application server. Examples of
+                        relevant data include, but are not limited to, Java Virtual Machine (JVM)
+                        activity, HTTPD/Web server activity, and application server-related system
                         process activity</description>
 		<rationale>Remote system connections should be traceable and auditable</rationale>
 		<ident cce=""/>
@@ -203,17 +216,17 @@
 
 	<Rule id="jboss_logging_event_types" severity="medium">
 		<title>JBoss must be configured to produce log records containing information to establish what type of events occurred.</title>
-		<description>Information system logging capability is critical for accurate forensic 
-                        analysis. Without being able to establish what type of event occurred, it 
-                        would be difficult to establish, correlate, and investigate the events 
-                        relating to an incident or identify those responsible. Log record content 
-                        that may be necessary to satisfy the requirement of this control includes 
-                        time stamps, source and destination addresses, user/process identifiers, 
-                        event descriptions, success/fail indications, filenames involved, and 
-                        access control or flow control rules invoked. Application servers must log 
-                        all relevant log data that pertains to the application server. Examples of 
-                        relevant data include, but are not limited to, Java Virtual Machine (JVM) 
-                        activity, HTTPD/Web server activity, and application server-related system 
+		<description>Information system logging capability is critical for accurate forensic
+                        analysis. Without being able to establish what type of event occurred, it
+                        would be difficult to establish, correlate, and investigate the events
+                        relating to an incident or identify those responsible. Log record content
+                        that may be necessary to satisfy the requirement of this control includes
+                        time stamps, source and destination addresses, user/process identifiers,
+                        event descriptions, success/fail indications, filenames involved, and
+                        access control or flow control rules invoked. Application servers must log
+                        all relevant log data that pertains to the application server. Examples of
+                        relevant data include, but are not limited to, Java Virtual Machine (JVM)
+                        activity, HTTPD/Web server activity, and application server-related system
                         process activity</description>
 		<rationale>Logging event types should be organizable by the type of event being traced</rationale>
 		<ident cce=""/>
@@ -222,23 +235,23 @@
 
 	<Rule id="jboss_logging_date_time" severity="medium">
 		<title>JBoss Log Formatter must be configured to produce log records that establish the date and time the events occurred.</title>
-		<description>Application server logging capability is critical for accurate forensic 
-                        analysis. Without sufficient and accurate information, a correct replay of 
-                        the events cannot be determined. Ascertaining the correct order of the 
-                        events that occurred is important during forensic analysis. Events that 
-                        appear harmless by themselves might be flagged as a potential threat when 
-                        properly viewed in sequence. By also establishing the event date and time, 
-                        an event can be properly viewed with an enterprise tool to fully see a 
-                        possible threat in its entirety. Without sufficient information establishing 
-                        when the log event occurred, investigation into the cause of event is 
-                        severely hindered. Log record content that may be necessary to satisfy the 
-                        requirement of this control includes, but is not limited to, time stamps, 
-                        source and destination IP addresses, user/process identifiers, event 
-                        descriptions, application-specific events, success/fail indications, 
-                        filenames involved, access control, or flow control rules invoked. In addition 
-                        to logging event information, application servers must also log the 
-                        corresponding dates and times of these events. Examples of event data 
-                        include, but are not limited to, Java Virtual Machine (JVM) activity, 
+		<description>Application server logging capability is critical for accurate forensic
+                        analysis. Without sufficient and accurate information, a correct replay of
+                        the events cannot be determined. Ascertaining the correct order of the
+                        events that occurred is important during forensic analysis. Events that
+                        appear harmless by themselves might be flagged as a potential threat when
+                        properly viewed in sequence. By also establishing the event date and time,
+                        an event can be properly viewed with an enterprise tool to fully see a
+                        possible threat in its entirety. Without sufficient information establishing
+                        when the log event occurred, investigation into the cause of event is
+                        severely hindered. Log record content that may be necessary to satisfy the
+                        requirement of this control includes, but is not limited to, time stamps,
+                        source and destination IP addresses, user/process identifiers, event
+                        descriptions, application-specific events, success/fail indications,
+                        filenames involved, access control, or flow control rules invoked. In addition
+                        to logging event information, application servers must also log the
+                        corresponding dates and times of these events. Examples of event data
+                        include, but are not limited to, Java Virtual Machine (JVM) activity,
                         HTTPD activity, and application server-related system process activity</description>
 		<rationale>Date and time must be traceable in the logs</rationale>
 		<ident cce=""/>
@@ -247,14 +260,14 @@
 
 	<Rule id="jboss_logging_source_app" severity="medium">
 		<title>JBoss must be configured to produce log records that establish which hosted application triggered the events.</title>
-		<description>Application server logging capability is critical for accurate 
-                        forensic analysis. Without sufficient and accurate information, a correct 
-                        replay of the events cannot be determined. By default, no web logging is 
-                        enabled in JBoss. Logging can be configured per web application or by 
-                        virtual server. If web application logging is not set up, application 
-                        activity will not be logged. Ascertaining the correct location or process 
-                        within the application server where the events occurred is important 
-                        during forensic analysis. To determine where an event occurred, the log 
+		<description>Application server logging capability is critical for accurate
+                        forensic analysis. Without sufficient and accurate information, a correct
+                        replay of the events cannot be determined. By default, no web logging is
+                        enabled in JBoss. Logging can be configured per web application or by
+                        virtual server. If web application logging is not set up, application
+                        activity will not be logged. Ascertaining the correct location or process
+                        within the application server where the events occurred is important
+                        during forensic analysis. To determine where an event occurred, the log
                         data must contain data containing the application identity</description>
 		<rationale>The source application for any log event must be traceable</rationale>
 		<ident cce=""/>
@@ -463,7 +476,7 @@
 
 	<Rule id="jboss_app_mgmt_separation" severity="medium">
 		<title>The JBoss server must separate hosted application functionality from application server management functionality.</title>
-		<description>The application server consists of the management interface and hosted applications. By separating the management interface from hosted applications, the user must authenticate as a privileged user to the management interface before being presented with management functionality. This prevents non-privileged users from having visibility to functions not available to the user. By limiting visibility, a compromised non-privileged account does not offer information to the attacker or functionality and information needed to further the attack on the application server. JBoss is designed to operate with separate application and management interfaces. The JBoss server is started via a script. To start the JBoss server in domain mode, the admin will execute the <JBOSS_HOME>/bin/domain.sh or domain.bat script. To start the JBoss server in standalone mode, the admin will execute <JBOSS_HOME>/bin/standalone.bat or standalone.sh. Command line flags are used to specify which network address is used for management and which address is used for public/application access</description>
+		<description>The application server consists of the management interface and hosted applications. By separating the management interface from hosted applications, the user must authenticate as a privileged user to the management interface before being presented with management functionality. This prevents non-privileged users from having visibility to functions not available to the user. By limiting visibility, a compromised non-privileged account does not offer information to the attacker or functionality and information needed to further the attack on the application server. JBoss is designed to operate with separate application and management interfaces. The JBoss server is started via a script. To start the JBoss server in domain mode, the admin will execute the &lt;JBOSS_HOME&gt;/bin/domain.sh or domain.bat script. To start the JBoss server in standalone mode, the admin will execute &lt;JBOSS_HOME&gt;/bin/standalone.bat or standalone.sh. Command line flags are used to specify which network address is used for management and which address is used for public/application access</description>
 		<rationale>Management functions and application functions should be authorized separately for the appropriate users</rationale>
 		<ident cce=""/>
 		<ref ossrg="SRG-APP-000211-AS-000146" stigid="000050" />
@@ -664,5 +677,3 @@
 
 
 </Group>
-
-
